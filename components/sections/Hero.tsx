@@ -14,7 +14,7 @@ export default function Hero() {
         animate={{ scale: 1 }}
         transition={{ duration: 12, ease: "easeOut" }}
       >
-        <Image src="/images/hero.jpg" alt="Azure Bay Resort beachfront" fill priority className="object-cover" />
+        <Image src="/images/Hero.jpg" alt="Azure Bay Resort beachfront" fill priority className="object-cover" />
       </motion.div>
       <div className="absolute inset-0 bg-gradient-to-b from-navy/70 via-navy/40 to-navy/80" />
 
