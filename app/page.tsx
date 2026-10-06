@@ -5,9 +5,9 @@ import Reveal from "@/components/motion/Reveal";
 import SectionHeading from "@/components/ui-custom/SectionHeading";
 
 const rooms = [
-  { img: "/images/room-1.jpg", name: "Ocean Deluxe", price: "$180", desc: "Private balcony with sea views." },
-  { img: "/images/room-2.jpg", name: "Bay Suite", price: "$260", desc: "Spacious suite with a lounge area." },
-  { img: "/images/room-3.jpg", name: "Royal Villa", price: "$420", desc: "Plunge pool and private garden." },
+  { img: "/images/room-1.jpg", name: "Ocean Deluxe", price: "LKR 55,000", desc: "Private balcony with sea views." },
+  { img: "/images/room-2.jpg", name: "Bay Suite", price: "LKR 78,000", desc: "Spacious suite with a lounge area." },
+  { img: "/images/room-3.jpg", name: "Royal Villa", price: "LKR 125,000", desc: "Plunge pool and private garden." },
 ];
 
 export default function Home() {
@@ -24,13 +24,22 @@ export default function Home() {
             refined modern comfort. Wake to the sound of waves, dine on the freshest catch,
             and unwind in spaces designed for stillness.
           </p>
-          <Link href="/rooms" className="mt-8 inline-block border-b border-gold pb-1 text-sm uppercase tracking-widest text-navy transition-colors hover:text-gold">
+          <Link
+            href="/rooms"
+            className="mt-8 inline-block border-b border-gold pb-1 text-sm uppercase tracking-widest text-navy transition-colors hover:text-gold"
+          >
             Discover Our Rooms
           </Link>
         </Reveal>
         <Reveal delay={0.2}>
           <div className="relative aspect-[4/5] overflow-hidden rounded-2xl">
-            <Image src="/images/about.jpg" alt="Resort pool at sunset" fill className="object-cover transition-transform duration-700 hover:scale-105" />
+            <Image
+              src="/images/about.jpg"
+              alt="Resort pool at sunset"
+              fill
+              sizes="(min-width: 768px) 50vw, 100vw"
+              className="object-cover transition-transform duration-700 hover:scale-105"
+            />
           </div>
         </Reveal>
       </section>
@@ -41,16 +50,22 @@ export default function Home() {
           <div className="mt-16 grid gap-8 md:grid-cols-3">
             {rooms.map((r, i) => (
               <Reveal key={r.name} delay={i * 0.15}>
-                <div className="group overflow-hidden rounded-2xl bg-card shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl">
+                <Link href="/rooms" className="group block overflow-hidden rounded-2xl bg-card shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl">
                   <div className="relative aspect-[4/3] overflow-hidden">
-                    <Image src={r.img} alt={r.name} fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
+                    <Image
+                      src={r.img}
+                      alt={r.name}
+                      fill
+                      sizes="(min-width: 768px) 33vw, 100vw"
+                      className="object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
                   </div>
                   <div className="p-6">
                     <h3 className="font-serif text-2xl">{r.name}</h3>
                     <p className="mt-2 text-sm text-navy/70">{r.desc}</p>
                     <p className="mt-4 text-gold">From {r.price} / night</p>
                   </div>
-                </div>
+                </Link>
               </Reveal>
             ))}
           </div>
@@ -58,7 +73,13 @@ export default function Home() {
       </section>
 
       <section className="relative flex min-h-[70vh] items-center justify-center overflow-hidden">
-        <Image src="/images/dining.jpg" alt="Fine dining at Azure Bay" fill className="object-cover" />
+        <Image
+          src="/images/dining.jpg"
+          alt="Fine dining at Azure Bay"
+          fill
+          sizes="100vw"
+          className="object-cover"
+        />
         <div className="absolute inset-0 bg-navy/70" />
         <Reveal className="relative z-10 px-6 text-center">
           <p className="text-sm uppercase tracking-[0.3em] text-gold">Dining</p>
@@ -66,7 +87,10 @@ export default function Home() {
           <p className="mx-auto mt-6 max-w-xl text-cream/80">
             Fresh seafood, island spices and a chef&apos;s tasting menu, served beside the sea.
           </p>
-          <Link href="/dining" className="mt-8 inline-block rounded-full bg-gold px-8 py-3 text-sm uppercase tracking-widest text-navy transition-all hover:bg-cream">
+          <Link
+            href="/dining"
+            className="mt-8 inline-block rounded-full bg-gold px-8 py-3 text-sm uppercase tracking-widest text-navy transition-all hover:bg-cream"
+          >
             View Menu
           </Link>
         </Reveal>
