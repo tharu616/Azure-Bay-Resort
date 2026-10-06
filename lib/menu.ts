@@ -26,6 +26,6 @@ export const menu: Record<string, MenuItem[]> = {
 };
 
 export const specials = [
-  { name: "Chef's Tasting Menu", desc: "Six courses of island flavours with wine pairing.", price: 14500, image: "/images/dining.jpg" },
-  { name: "Sunset Seafood Platter", desc: "Lobster, prawns, calamari and crab for two.", price: 18900, image: "/images/dining.jpg" },
+  { name: "Chef's Tasting Menu", desc: "Six courses of island flavours with wine pairing.", price: 14500, image: "/images/dining-1.jpg" },
+  { name: "Sunset Seafood Platter", desc: "Lobster, prawns, calamari and crab for two.", price: 18900, image: "/images/dining-2.jpg" },
 ];

@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 export default function DiningPage() {
   return (
     <>
-      <PageHeader eyebrow="Restaurant" title="Taste the Coast" image="/images/dining.jpg" />
+      <PageHeader eyebrow="Restaurant" title="Taste the Coast" image="/images/dining-3.jpg" />
 
       <section className="px-6 pt-24">
         <SectionHeading eyebrow="Our Menu" title="Fresh from Sea & Garden" />

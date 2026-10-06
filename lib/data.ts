@@ -34,7 +34,7 @@ export const rooms: Room[] = [
     price: 45000,
     size: "35 m²",
     guests: 2,
-    image: "/images/room-2.jpg",
+    image: "/images/room-4.jpg",
     short: "Tropical garden outlook.",
     description:
       "Surrounded by palms and frangipani, this room offers a peaceful retreat with a cosy reading nook and a private terrace.",
@@ -47,7 +47,7 @@ export const rooms: Room[] = [
     price: 78000,
     size: "58 m²",
     guests: 3,
-    image: "/images/room-2.jpg",
+    image: "/images/room-5.jpg",
     short: "Spacious suite with lounge.",
     description:
       "A separate living area, a deep soaking tub and floor-to-ceiling windows frame the bay. Perfect for longer stays.",
@@ -60,7 +60,7 @@ export const rooms: Room[] = [
     price: 96000,
     size: "72 m²",
     guests: 4,
-    image: "/images/room-3.jpg",
+    image: "/images/room-6.jpg",
     short: "Two bedrooms, panoramic views.",
     description:
       "Our largest suite features two bedrooms, a dining area and a wraparound balcony with sunset views over the bay.",
@@ -73,7 +73,7 @@ export const rooms: Room[] = [
     price: 125000,
     size: "110 m²",
     guests: 4,
-    image: "/images/room-3.jpg",
+    image: "/images/room-7.jpg",
     short: "Plunge pool and private garden.",
     description:
       "A private villa with its own plunge pool, outdoor shower and tropical garden, steps from the beach.",
