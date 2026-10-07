@@ -32,7 +32,7 @@ export default function Footer() {
             <br />
             Southern Province, Sri Lanka
             <br />
-            +94 77 123 4567
+            +94 76 153 5759
             <br />
             stay@azurebay.lk
           </p>
