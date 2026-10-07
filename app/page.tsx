@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import Hero from "@/components/sections/Hero";
+import Stats from "@/components/sections/Stats";
+import Testimonials from "@/components/sections/Testimonials";
 import Reveal from "@/components/motion/Reveal";
 import SectionHeading from "@/components/ui-custom/SectionHeading";
 
@@ -50,7 +52,10 @@ export default function Home() {
           <div className="mt-16 grid gap-8 md:grid-cols-3">
             {rooms.map((r, i) => (
               <Reveal key={r.name} delay={i * 0.15}>
-                <Link href="/rooms" className="group block overflow-hidden rounded-2xl bg-card shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl">
+                <Link
+                  href="/rooms"
+                  className="group block overflow-hidden rounded-2xl bg-card shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl"
+                >
                   <div className="relative aspect-[4/3] overflow-hidden">
                     <Image
                       src={r.img}
@@ -95,6 +100,9 @@ export default function Home() {
           </Link>
         </Reveal>
       </section>
+
+      <Stats />
+      <Testimonials />
     </>
   );
 }
