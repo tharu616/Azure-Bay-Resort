@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function GalleryPage() {
   return (
     <>
-      <PageHeader eyebrow="Gallery" title="Moments at Azure Bay" image="/images/hero.jpg" />
+      <PageHeader eyebrow="Gallery" title="Moments at Azure Bay" image="/images/Hero.jpg" />
       <GalleryGrid />
     </>
   );
