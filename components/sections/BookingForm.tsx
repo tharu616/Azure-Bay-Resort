@@ -4,8 +4,6 @@ import { AnimatePresence, motion } from "framer-motion";
 import { CheckCircle2 } from "lucide-react";
 import { rooms } from "@/lib/data";
 
-const WHATSAPP_NUMBER = "94761535759";
-
 type Form = {
   name: string;
   email: string;
@@ -45,31 +43,15 @@ function validate(f: Form): Errors {
   return e;
 }
 
-function buildWhatsAppUrl(f: Form) {
-  const room = rooms.find((r) => r.name === f.room);
-  const lines = [
-    "*New Booking Request - Azure Bay Resort*",
-    "",
-    `Name: ${f.name}`,
-    `Email: ${f.email}`,
-    `Phone: ${f.phone}`,
-    `Room: ${f.room}${room ? ` (LKR ${room.price.toLocaleString("en-US")} / night)` : ""}`,
-    `Check-in: ${f.checkIn}`,
-    `Check-out: ${f.checkOut}`,
-    `Guests: ${f.guests}`,
-  ];
-  if (f.message.trim()) lines.push(`Requests: ${f.message.trim()}`);
-  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(lines.join("\n"))}`;
-}
-
 const field =
   "w-full rounded-lg border border-navy/15 bg-card px-4 py-3 text-sm text-navy outline-none transition-all focus:border-gold focus:ring-2 focus:ring-gold/30";
 
 export default function BookingForm() {
   const [form, setForm] = useState<Form>(initial);
   const [errors, setErrors] = useState<Errors>({});
+  const [loading, setLoading] = useState(false);
   const [sent, setSent] = useState(false);
-  const [waUrl, setWaUrl] = useState("");
+  const [serverError, setServerError] = useState(false);
 
   const set = (k: keyof Form) => (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
@@ -78,15 +60,27 @@ export default function BookingForm() {
     if (errors[k]) setErrors((p) => ({ ...p, [k]: undefined }));
   };
 
-  const onSubmit = (e: React.FormEvent) => {
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const errs = validate(form);
     setErrors(errs);
     if (Object.keys(errs).length) return;
-    const url = buildWhatsAppUrl(form);
-    setWaUrl(url);
-    window.open(url, "_blank", "noopener,noreferrer");
-    setSent(true);
+
+    setLoading(true);
+    setServerError(false);
+    try {
+      const res = await fetch("/api/booking", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) throw new Error("Request failed");
+      setSent(true);
+    } catch {
+      setServerError(true);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const Err = ({ k }: { k: keyof Form }) =>
@@ -103,25 +97,17 @@ export default function BookingForm() {
             className="flex min-h-[420px] flex-col items-center justify-center text-center"
           >
             <CheckCircle2 size={64} className="text-gold" />
-            <h3 className="mt-6 font-serif text-3xl">Almost There</h3>
+            <h3 className="mt-6 font-serif text-3xl">Request Received</h3>
             <p className="mt-3 max-w-sm text-sm text-navy/70">
-              Thank you, {form.name.split(" ")[0]}. WhatsApp should have opened with your booking
-              details. Press send there to confirm your {form.room} request.
+              Thank you, {form.name.split(" ")[0]}. Our team will confirm your {form.room} booking
+              by email within 24 hours.
             </p>
-            <a
-              href={waUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-6 rounded-full bg-[#25D366] px-6 py-3 text-sm uppercase tracking-widest text-white transition-opacity hover:opacity-90"
-            >
-              Open WhatsApp Again
-            </a>
             <button
               onClick={() => {
                 setForm(initial);
                 setSent(false);
               }}
-              className="mt-6 text-sm uppercase tracking-widest text-gold underline-offset-4 hover:underline"
+              className="mt-8 text-sm uppercase tracking-widest text-gold underline-offset-4 hover:underline"
             >
               Make another booking
             </button>
@@ -179,11 +165,27 @@ export default function BookingForm() {
               onChange={set("message")}
             />
 
+            {serverError && (
+              <p className="rounded-lg bg-red-50 p-3 text-sm text-red-700">
+                Something went wrong while sending. Please try again, or message us on{" "}
+                <a
+                  href="https://wa.me/94761535759"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-medium underline"
+                >
+                  WhatsApp
+                </a>
+                .
+              </p>
+            )}
+
             <button
               type="submit"
-              className="w-full rounded-full bg-navy py-3 text-sm uppercase tracking-widest text-cream transition-all duration-300 hover:bg-gold hover:text-navy"
+              disabled={loading}
+              className="w-full rounded-full bg-navy py-3 text-sm uppercase tracking-widest text-cream transition-all duration-300 hover:bg-gold hover:text-navy disabled:opacity-60"
             >
-              Send Booking via WhatsApp
+              {loading ? "Sending..." : "Request Booking"}
             </button>
           </motion.form>
         )}
